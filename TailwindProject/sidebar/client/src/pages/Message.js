@@ -13,7 +13,7 @@ const Message=()=>
    const handleSubmit=(e)=>
     {
         e.preventDefault();
-        axois.post('http://localhost:5000/receiveEmail' || 'http://157.230.242.48/receiveEmail',{
+        axois.post('http://localhost:5000/receiveEmail' || 'http://167.99.64.201:5000/receiveEmail',{
             name:name,
             contact:contact,
             message:message,
