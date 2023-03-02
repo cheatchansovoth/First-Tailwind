@@ -7,11 +7,13 @@ const User = require('../db/user');
 const validator = require('validator');
 router.use(express.json())
 
+//retrive all information from user table
 router.get('/', (req, res) => {
     User.find()
         .then(users => res.send(users))
         .catch(err => res.status(500).send(err));
 });
+//register users
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
     const options={minLength:8}
@@ -27,14 +29,17 @@ router.post('/register', async (req, res) => {
         res.status(400).send({Error:'Weak Password'});
     }
 });
+//retrive user information by ID as param
 router.get('/:id', (req, res) => {
     User.findById(req.params.id)
         .then(user => res.send(user))
         .catch(err => res.status(404).send(err));
 });
+//login user && password
 router.post('/login',async (req,res,next)=>
 {
     const {email,password}=req.body;
+    //finding if user exist
     User.findOne({email}).then(user=>
         {
             if(!user)
@@ -43,6 +48,7 @@ router.post('/login',async (req,res,next)=>
             }
             else
             {
+              //compare hash password and database password in hash
               bcrypt.compare(password, user.password, function(err, result) {
                 if (err) {
                   return res.status(500).json({ error: err });
@@ -56,6 +62,7 @@ router.post('/login',async (req,res,next)=>
             }
         })
 })
+//sending email require username and password
 function sendResetPasswordEmail(user, resetToken) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -82,7 +89,7 @@ function sendResetPasswordEmail(user, resetToken) {
       }
     });
   }
-
+//reset password 
   router.post('/resetpassword',(req,res,next)=>
   {
     const {email}=req.body;
