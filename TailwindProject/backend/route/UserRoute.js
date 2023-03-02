@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const nodemailer =require('nodemailer');
+const bcrypt = require('bcrypt');
 const User = require('../db/user');
 const validator = require('validator');
 router.use(express.json())
@@ -11,12 +12,12 @@ router.get('/', (req, res) => {
         .then(users => res.send(users))
         .catch(err => res.status(500).send(err));
 });
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
-    const user = new User({ name, email, password });
     const options={minLength:8}
     if (validator.isStrongPassword(password,options))
     {
+        const user = new User({ name, email, password});
         user.save()
         .then(() => res.status(201).send('User created'))
         .catch(err => res.status(400).send(err));
@@ -40,13 +41,18 @@ router.post('/login',async (req,res,next)=>
             {
                 return res.status(401).json({message:'Invalid information'});
             }
-            if(user.password!=password)
-            {
-                return res.status(400).json({message:'Wrong password'});
-            }
             else
             {
-                return res.status(200).json({ok:'Login'})
+              bcrypt.compare(password, user.password, function(err, result) {
+                if (err) {
+                  return res.status(500).json({ error: err });
+                }
+                if (!result) {
+                  return res.status(401).json({ error: 'Invalid credentials' });
+                }
+                  return res.status(200).json({ok:'Correct Information'});
+            });
+
             }
         })
 })
