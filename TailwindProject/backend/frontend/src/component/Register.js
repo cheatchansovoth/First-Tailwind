@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FcGoogle,FcPrivacy,FcInternal} from "react-icons/fc"
 import { RiLoginCircleLine } from "react-icons/ri";
 
@@ -17,6 +17,7 @@ const Register=()=>
                         <p className='font-bold text-white'>of type and scrambled it to make a type specimen book. It has</p>
                         <p className='font-bold text-white'>survived not only five centuries, but also the leap into electronic</p>
                         <p className='font-bold text-white'>survived not only five centuries, but also the leap into electronic</p>
+                        <p>{smg}</p>
                         <button class="h-10 px-10 m-2 mx-28 mt-10  text-indigo-100 transition-colors duration-150 bg-indigo-700  focus:shadow-outline hover:bg-indigo-800 flex items-center justify-center ">Have An Account</button>
                     </div>
                 </div>
