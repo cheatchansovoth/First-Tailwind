@@ -20,7 +20,7 @@ const Login=()=>
           </div>
           <button class="h-8 px-10 m-2 mx-16 mt-5 text-xl text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 flex items-center justify-center"><RiLoginCircleLine/>Login</button>
           <h1 className='text-center m-3'></h1>
-        <button class="h-8 px-10 mx-16 my-3 mb-12 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 items-center justify-center flex mb-5"><FcGoogle/>Login with Google</button>
+         <button class="h-8 px-10 mx-16 my-3 mb-12 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 items-center justify-center flex mb-5"><FcGoogle/>Login with Google</button>
         </div>
         </form>
         </div>

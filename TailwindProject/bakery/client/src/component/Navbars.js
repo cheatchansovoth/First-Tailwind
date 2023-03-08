@@ -6,7 +6,7 @@ const Navbars=()=>
     return(
 <div className="navbar bg-base-100">
   <div className="flex-1 lg:mx-10">
-    <a className="btn btn-ghost normal-case text-xl" href='/'> Imagine Bakery</a>
+    <a className="btn btn-ghost normal-case text-xl font-bold" href='/'> IMAGINE Bakery</a>
     <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -21,9 +21,9 @@ const Navbars=()=>
   </div>
   <div className="navbar hidden lg:flex mx-60">
     <ul className="menu menu-horizontal">
-      <li><a>Home</a></li>
-      <li><a>About</a></li>
-      <li><a>Contact</a></li>
+      <li><a className='font-bold text-xs uppercase '>Home</a></li>
+      <li><a className='font-bold text-xs uppercase '>ABOUT</a></li>
+      <li><a className='font-bold text-xs uppercase '>Contact</a></li>
     </ul>
   </div>
   </div>
