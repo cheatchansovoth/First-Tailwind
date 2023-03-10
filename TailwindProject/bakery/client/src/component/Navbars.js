@@ -1,8 +1,11 @@
 import {react} from 'react'
-
+import { BsFillPersonFill } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 const Navbars=()=>
 {
+  const storeData=JSON.parse(localStorage.getItem('token'));
+
     return(
 <div className="navbar bg-base-100">
   <div className="flex-1 lg:mx-10">
@@ -45,7 +48,11 @@ const Navbars=()=>
         </div>
       </div>
     </div>
-    <div className="dropdown dropdown-end">
+
+
+    <div>
+    {storeData?<div>
+      <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -61,6 +68,8 @@ const Navbars=()=>
         <li><a>Settings</a></li>
         <li><a>Logout</a></li>
       </ul>
+      </div>
+    </div>:<Link to='/Login' className='text-2xl'><BsFillPersonFill/></Link>}
     </div>
   </div>
 </div>
