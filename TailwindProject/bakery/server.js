@@ -5,6 +5,7 @@ const User=require('./db/user')
 const Foods=require('./db/food')
 const multer=require('multer');
 const app=express();
+const productRouter=require('./route/FoodRoute')
 const userRouter=require('./route/UserRoute');
 const { default: mongoose } = require('mongoose');
 
@@ -23,7 +24,7 @@ const storeImage=multer({storage:storage});
 
 app.use(express.json())
 app.use(cors());
-
+app.use('/product',productRouter);
 app.use('/user',userRouter);
 
 app.post('/storeiamge',storeImage.single('image'),async(req,res)=>

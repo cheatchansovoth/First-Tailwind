@@ -15,38 +15,42 @@ const Hero=()=>
                 <div>
                 <h1 className="text-5xl font-bold">Welcome </h1>
                 <p className="py-6">The bakery shop is filled with the aroma of freshly baked bread and pastries,<br/> and the display cases are filled with a mouth-watering assortment of cakes and cookies.</p>
-                <button className="btn btn-outlin">Call us now</button>
+                <button className="btn btn-outline">Call us now</button>
                 </div>
             </div>
             </div>
-                <div className="hero min-h-[50%] bg-base-300">
+                        <div className="hero">
+                            <div>
+                                <h1 className="text-5xl text-center my-6">YOUR FRENCH BAKERY ONLINE</h1>
+                                <p className="text-center my-3">Paneton offers a range of fresh, frozen and par-baked breads and pastry products directly to our customers via online shopping, </p>
+                                <p className="text-center mb-3">click and collect from Farmhouse Lane, St Johns, Auckland and to our stockists nationwide, from Rarotonga to Christchurch. </p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center md:flex-row">
+                                    <div className="mx-10 ">
+                                    <MdBakeryDining className="text-[120px] mx-20"/>
+                                    <h1 className="text-center text-3xl font-bold my-3">Fresh every time</h1>
+                                    <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of.</p>
+                                    </div>
+                                    <div className="mx-10">
+                                    <HiBuildingStorefront className="text-[120px]  mx-20"/>
+                                    <h1 className="text-center text-3xl font-bold my-3">Authentic</h1>
+                                    <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of the French </p>
+                                    </div>
+                                    <div className="mx-10" >
+                                    <FaShuttleVan className="text-[120px]  mx-20"/>
+                                    <h1 className="text-center text-3xl font-bold my-3">Convenient</h1>
+                                    <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of </p>
+                                    </div>
+                        </div>
                     <div>
-                        <h1 className="text-5xl text-center my-6">YOUR FRENCH BAKERY ONLINE</h1>
-                        <p className="text-center my-3">Paneton offers a range of fresh, frozen and par-baked breads and pastry products directly to our customers via online shopping, </p>
-                        <p className="text-center mb-3">click and collect from Farmhouse Lane, St Johns, Auckland and to our stockists nationwide, from Rarotonga to Christchurch. </p>
+                    <div className="w-[100%] flex flex-col items-center my-10">
+                    <h1 className="text-center text-[35px] uppercase font-bold underline">Our Products</h1>
+                        <div className="w-[50%]">
+                        <Card/>
+                        </div>
                     </div>
-                  </div>
-                <div className="flex flex-col justify-center items-center md:flex-row bg-base-200">
-                            <div className="mx-10 ">
-                            <MdBakeryDining className="text-[120px] mx-20"/>
-                            <h1 className="text-center text-3xl font-bold my-3">Fresh every time</h1>
-                            <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of.</p>
-                            </div>
-                            <div className="mx-10">
-                            <HiBuildingStorefront className="text-[120px]  mx-20"/>
-                            <h1 className="text-center text-3xl font-bold my-3">Authentic</h1>
-                            <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of the French </p>
-                            </div>
-                            <div className="mx-10" >
-                            <FaShuttleVan className="text-[120px]  mx-20"/>
-                            <h1 className="text-center text-3xl font-bold my-3">Convenient</h1>
-                            <p className="text-center">	We've done all the hard work, you can enjoy<br/> the taste and smell of </p>
-                            </div>
-                </div>
-             <h1 className="text-center text-[35px] uppercase font-bold underline">Our Products</h1>
-             <div className="mx-[10%] sm:w-[70%] sm:mx-[15%]">
-                <Card/>
-             </div>
+                    </div>
     </React.Fragment>
     )
 }
