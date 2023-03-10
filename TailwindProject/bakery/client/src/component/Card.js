@@ -1,6 +1,7 @@
-import {React, useEffect, useState} from 'react'
+import {React, useEffect, useState,useContext} from 'react'
 import Carousel from 'react-multi-carousel';
 import Axios from 'axios';
+import { UserContext } from './useContext';
 const Card=()=>
 {
     const responsive = {
@@ -21,7 +22,14 @@ const Card=()=>
         }
       };
       const [foods,setFoods]=useState([]);
-
+      const [toCart,SetToCart]=useState([]);
+      const [getItem,SetGetItem]=useContext(UserContext);
+      const AddProduct=(product)=>
+      {
+        SetToCart([...toCart,{...product}]);
+      }
+      SetGetItem(toCart.length);
+      window.localStorage.setItem('token',JSON.stringify(toCart));
       useEffect(()=>
       {
         Axios.get("http://localhost:5001/product/").then((response)=>
@@ -35,10 +43,10 @@ const Card=()=>
     return (
         <div>
             <Carousel responsive={responsive}>
-                {foods.map((food)=>
+                {foods.map((food,key)=>
                 {
                     return(
-                        <div className="card w-96 bg-base-100 shadow-xl">
+                        <div className="card w-96 bg-base-100 shadow-xl" key={food.id}>
                         <figure className="px-10 pt-10">
                             <img src={`/images/${food.image}`} alt={food.Foodname} className="rounded-xl" />
                         </figure>
@@ -46,15 +54,17 @@ const Card=()=>
                             <h2 className="card-title">{food.Foodname}<span className="badge badge-secondary">${food.Price}</span></h2>
                             <p>{food.Description}</p>
                             <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <button className="btn btn-primary" onClick={()=>AddProduct(food)}>Buy Now</button>
                             </div>
                         </div>
+                        
                         </div>
-
+                      
                     )
                 })}
         </Carousel>
-        </div>
+
+          </div>
     )
 }
 export default Card;
