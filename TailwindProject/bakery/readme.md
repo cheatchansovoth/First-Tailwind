@@ -8,5 +8,6 @@ Node.js Backend run at Port 5001
     -UserRoute
     -ProductRoute
 Reset password with Email API(setup your own one)
+    -Change Username && Password
 --------------------------------------------------
 
