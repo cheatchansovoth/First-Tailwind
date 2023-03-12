@@ -5,10 +5,12 @@ import Axios from 'axios';
 import {Formik, useFormik} from 'formik';
 import Forget from './Forget'
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from './useContext';
 
 const Login=()=>
 {
   const [errorMessage,setErrorMessage]=useState("");
+  const [isLogging,setLogging]=useContext(UserContext);
   let navigate=useNavigate();
   const Formik=useFormik({
     initialValues:{
@@ -22,9 +24,10 @@ const Login=()=>
       }).then(res=>
         {
           console.log(res.data);
-          window.localStorage.setItem('token',JSON.stringify(res.data));
-          window.location.reload();
+          window.localStorage.setItem('__userInfo',JSON.stringify(res.data));
           navigate("/")
+          setLogging(true)
+          window.location.reload();
         }).catch(err=>
           {
             setErrorMessage(err.response.data);

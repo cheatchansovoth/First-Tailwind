@@ -1,9 +1,26 @@
 import React from 'react';
-
-
-
+import {useEffect, useState,useContext} from 'react';
+import Axios from 'axios';
+import {useNavigate } from 'react-router-dom';
 const View=()=>
 {
+    const [foods,setFoods]=useState([]);
+    const __userinfo=JSON.parse(localStorage.getItem('__userInfo'));
+    let navigate=useNavigate();
+    useEffect(()=>
+      {
+        if (__userinfo === null || __userinfo === undefined)
+        {
+            navigate("/")
+        }
+        Axios.get("http://localhost:5001/product/").then((response)=>
+        {
+            setFoods(response.data);
+        }).catch((err)=>
+        {
+            console.log(err);
+        })
+      },[])
     return(
         <React.Fragment>
             <div className='flex flex-col items-center w-[100%]'>
@@ -32,129 +49,42 @@ const View=()=>
                         <th>Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {/* row 1 */}
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <td>
-                        <div className="flex items-center space-x-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                    {foods.map((food,key)=>
+                {
+                    return(
+                        <tbody>
+                        {/* row 1 */}
+                        <tr>
+                            <th>
+                            <label>
+                                <input type="checkbox" className="checkbox" />
+                            </label>
+                            </th>
+                            <td>
+                            <div className="flex items-center space-x-3">
+                                <div className="avatar">
+                                <div className="mask mask-squircle w-12 h-12">
+                                    <img src={`/images/${food.image}`} alt={food.Foodname} />
+                                </div>
+                                </div>
+                                <div>
+                                <div className="font-bold">{food.Foodname}</div>
+                                </div>
                             </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                            <div className="text-sm opacity-50">United States</div>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        Zemlak, Daniel and Leannon
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                        </td>
-                        <td>Purple</td>
-                        <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
-                    {/* row 2 */}
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <td>
-                        <div className="flex items-center space-x-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Brice Swyre</div>
-                            <div className="text-sm opacity-50">China</div>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        Carroll Group
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-                        </td>
-                        <td>Red</td>
-                        <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
-                    {/* row 3 */}
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <td>
-                        <div className="flex items-center space-x-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Marjy Ferencz</div>
-                            <div className="text-sm opacity-50">Russia</div>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        Rowe-Schoen
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-                        </td>
-                        <td>Crimson</td>
-                        <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
-                    {/* row 4 */}
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <td>
-                        <div className="flex items-center space-x-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Yancy Tear</div>
-                            <div className="text-sm opacity-50">Brazil</div>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        Wyman-Ledner
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-                        </td>
-                        <td>Indigo</td>
-                        <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
-                    </tbody>
-                    
+                            </td>
+                            <td>
+                            1
+                            <br/>
+                            </td>
+                            <td className='w-10'>{food.Description}</td>
+                            <th>
+                            <button className="btn btn-ghost btn-xs bg-red-500 my-3">Remove</button>
+                            </th>
+                        </tr>
+                        </tbody>
+                      
+                    )
+                })}
                 </table>
                 </div>
                 </div>

@@ -1,6 +1,6 @@
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import Sidebar from "../Sidebar";
-
+import {useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 const AddProduct=()=>
 {
@@ -9,6 +9,17 @@ const AddProduct=()=>
     const [Description,SetDescription]=useState("");
     const [image,setimage]=useState("");
     const [error,setError]=useState("")
+    const __userinfo=JSON.parse(localStorage.getItem('__userInfo'));
+    let navigate=useNavigate();
+
+    useEffect(()=>
+    {
+      if (__userinfo === null || __userinfo === undefined)
+      {
+          navigate("/")
+      }
+
+    },)
 
     const onHandle=(e)=>
     {

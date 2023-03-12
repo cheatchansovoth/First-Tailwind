@@ -13,10 +13,11 @@ import { UserContext } from './component/useContext';
 
 function App() {
   const [getItem,SetGetItem]=useState([]);
+  const [isLogging,setLogging]=useState(false);
   return (
     <div>
         <Router>
-        <UserContext.Provider value={[getItem,SetGetItem]}>
+        <UserContext.Provider value={[getItem,SetGetItem,isLogging,setLogging]}>
           <Navbars/>
           <Routes>
             <Route path="/" exact element={<Hero/>}></Route>

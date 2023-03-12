@@ -1,18 +1,28 @@
 import {react,useContext,useEffect,useState} from 'react'
 import { BsFillPersonFill } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { UserContext } from './useContext';
 const Navbars=()=>
 {
+  const __userinfo=JSON.parse(localStorage.getItem('__userInfo'));
   const storeData=JSON.parse(localStorage.getItem('token'));
-  const [getItem,SetGetItem]=useContext(UserContext);
+  let navigate=useNavigate();
+  const [getItem,SetGetItem,isLogging,setLogging]=useContext(UserContext);
   const [userItem,setUserItem]=useState([]);
 
+  const onClickRemove=()=>
+  {
+    localStorage.removeItem('__userInfo')
+    localStorage.removeItem('token')
+    navigate("/")
+    window.location.reload();
+  }
   useEffect(()=>
   {
       setUserItem(storeData)
       
-  },[userItem])
+  },[])
+  console.log(isLogging)
   let totalPrice=storeData.reduce((a,v) =>  a = a + v.Price , 0 );
     return(
 <div className="navbar bg-base-100">
@@ -71,7 +81,7 @@ const Navbars=()=>
 
 
     <div>
-    {storeData?<div>
+    {__userinfo?<div>
       <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
@@ -86,7 +96,7 @@ const Navbars=()=>
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><button onClick={onClickRemove}>Logout</button></li>
       </ul>
       </div>
     </div>:<Link to='/Login' className='text-2xl'><BsFillPersonFill/></Link>}
